@@ -2,7 +2,7 @@
  * Name: jquery.hoverBomb.js
  * Description: Explode text on hover
  * Copyright (c) 2015 Jun Ishibashi
- * Version: 0.0.5
+ * Version: 0.0.6
  * Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
  */ 
 (function ($) {
@@ -56,7 +56,7 @@
 					length, maxLength = 0;
 				
 				spans.each(function(index, element) {
-					targetCoordinate[index] = {x: Random(-self.radius, self.radius), y: Random(-self.radius, self.radius)};
+					targetCoordinate[index] = {x: Random(-self.radius, self.radius, true), y: Random(-self.radius, self.radius, true)};
 					xDist = targetCoordinate[index].x - parseInt($(element).css("left"));
 					yDist = targetCoordinate[index].y - parseInt($(element).css("top"));
 					length = xDist * xDist + yDist * yDist;
@@ -156,13 +156,13 @@
 				this.loop = setInterval(function () {
 					self.elem.children("span").each(function(index, element) {
 						$(element).css({
-							              "top":             Random(-self.shakeRadius, self.shakeRadius),
-							             "left":             Random(-self.shakeRadius, self.shakeRadius),
-							"-webkit-transform": "rotate(" + Random(-op.shakeRotate, op.shakeRotate) + "deg)", 
-							   "-moz-transform": "rotate(" + Random(-op.shakeRotate, op.shakeRotate) + "deg)", 
-							    "-ms-transform": "rotate(" + Random(-op.shakeRotate, op.shakeRotate) + "deg)",
-							     "-o-transform": "rotate(" + Random(-op.shakeRotate, op.shakeRotate) + "deg)", 
-							        "transform": "rotate(" + Random(-op.shakeRotate, op.shakeRotate) + "deg)"
+							              "top":             Random(-self.shakeRadius, self.shakeRadius, true),
+							             "left":             Random(-self.shakeRadius, self.shakeRadius, true),
+							"-webkit-transform": "rotate(" + Random(-op.shakeRotate, op.shakeRotate, true) + "deg)", 
+							   "-moz-transform": "rotate(" + Random(-op.shakeRotate, op.shakeRotate, true) + "deg)", 
+							    "-ms-transform": "rotate(" + Random(-op.shakeRotate, op.shakeRotate, true) + "deg)",
+							     "-o-transform": "rotate(" + Random(-op.shakeRotate, op.shakeRotate, true) + "deg)", 
+							        "transform": "rotate(" + Random(-op.shakeRotate, op.shakeRotate, true) + "deg)"
 						});
 					});
 				}, this.fps);
@@ -224,9 +224,9 @@
 			return Math.round(Math.random() * min);
 		} else {
 			if (!isFloat) {
-				return Math.round((Math.random() * (max - min)) + min);
+				return Math.round(Math.random() * (max - min) + min);
 			} else {
-				return (Math.random() * (max - min)) + min;
+				return Math.random() * (max - min) + min;
 			}
 		}
 	};
