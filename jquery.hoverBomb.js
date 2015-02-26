@@ -2,7 +2,7 @@
  * Name: jquery.hoverBomb.js
  * Description: Explode text on hover
  * Copyright (c) 2015 Jun Ishibashi
- * Version: 0.0.6
+ * Version: 0.0.7
  * Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
  */ 
 (function ($) {
@@ -10,7 +10,7 @@
 	$.fn.hoverBomb = function (options) {
 		
 		var defaults = {
-			direction         : "all",
+			direction         : "all", // "north" or "south" or "east" or "west"
 			diameter          : 100,
 			shakeStep         : 1,
 			shakeRotate       : 45,
@@ -52,11 +52,29 @@
 					op = this.config,
 					spans = this.elem.children("span"),
 					targetCoordinate = new Array(spans.length),
+					randX, randY,
 					xDist, yDist,
 					length, maxLength = 0;
 				
 				spans.each(function(index, element) {
-					targetCoordinate[index] = {x: Random(-self.radius, self.radius, true), y: Random(-self.radius, self.radius, true)};
+					if (op.direction === "all") {
+						randX = Random(-self.radius, self.radius, true);
+						randY = Random(-self.radius, self.radius, true);
+					} else if (op.direction === "north") {
+						randX = Random(-self.radius * 0.5, self.radius * 0.5);
+						randY = Random(-self.radius, 0, true);
+					} else if (op.direction === "south") {
+						randX = Random(-self.radius * 0.5, self.radius * 0.5);
+						randY = Random(0, self.radius, true);
+					} else if (op.direction === "east") {
+						randX = Random(0, self.radius, true);
+						randY = Random(-self.radius * 0.5, self.radius * 0.5, true);
+					} else if (op.direction === "west") {
+						randX = Random(-self.radius, 0, true);
+						randY = Random(-self.radius * 0.5, self.radius * 0.5, true);
+					}
+					
+					targetCoordinate[index] = {x: randX, y: randY};
 					xDist = targetCoordinate[index].x - parseInt($(element).css("left"));
 					yDist = targetCoordinate[index].y - parseInt($(element).css("top"));
 					length = xDist * xDist + yDist * yDist;
