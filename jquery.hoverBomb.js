@@ -2,10 +2,10 @@
  * Name: jquery.hoverBomb.js
  * Description: Explode text on hover
  * Copyright (c) 2015 Jun Ishibashi
- * Version: 0.0.7
+ * Version: 0.0.8
  * Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
  */ 
-(function ($) {
+(function ($, undef) {
 
 	$.fn.hoverBomb = function (options) {
 		
@@ -236,9 +236,9 @@
 	};
 	
 	var Random = function (min, max, isFloat) {
-		if (!min) {
+		if (min == undef) {
 			return Math.random();
-		} else if (!max) {
+		} else if (max == undef) {
 			return Math.round(Math.random() * min);
 		} else {
 			if (!isFloat) {
