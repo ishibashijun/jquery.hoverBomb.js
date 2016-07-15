@@ -81,7 +81,7 @@ $('.bomb').hoverBomb();
 
 #### Demo
 
-[DEMO](http://ishibashijun.github.io/programming/2015/02/26/hoverBomb/)
+[DEMO](http://ishibashijun.github.io/programming/2015/02/26/hoverBomb)
 
 #### LICENSE
 
